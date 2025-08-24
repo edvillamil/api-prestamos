@@ -1,0 +1,33 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-prestamos-autenticacion
+  r2dbc:
+    url: r2dbc:pool:postgresql://localhost:5432/postgres?schema=public
+    username: postgres
+    password: crediyadb
+  sql:
+    init:
+      mode: always
+  liquibase:
+    enabled: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,prometheus
+  endpoint:
+    health:
+      probes:
+        enabled: true
+
+logging:
+  level:
+    root: INFO
+    co.com.gestionprestamos: DEBUG
+
+cors:
+  allowed-origins: "http://localhost:4200,http://localhost:8080"
