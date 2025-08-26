@@ -9,12 +9,12 @@ import java.util.UUID;
 @Data
 public class UserRequest {
 
-    private String nombres;
-    private String apellidos;
-    private LocalDate fecha_nacimiento;
-    private String direccion;
-    private String telefono;
-    private String correo_electronico;
-    private BigDecimal salario_base;
+    private String name;
+    private String last_name;
+    private LocalDate birth_date;
+    private String address;
+    private String mobile_number;
+    private String email;
+    private BigDecimal base_salary;
     private UUID rolId;
 }

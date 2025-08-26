@@ -20,12 +20,12 @@ public class UserEntity {
 
     @Id
     private UUID id;
-    private String nombres;
-    private String apellidos;
-    private LocalDate fechaNacimiento;
-    private String direccion;
-    private String telefono;
-    private String correoElectronico;
-    private BigDecimal salarioBase;
+    private String name;
+    private String lastName;
+    private LocalDate birthDate;
+    private String address;
+    private String mobileNumber;
+    private String email;
+    private BigDecimal baseSalary;
     private UUID rolId;
 }

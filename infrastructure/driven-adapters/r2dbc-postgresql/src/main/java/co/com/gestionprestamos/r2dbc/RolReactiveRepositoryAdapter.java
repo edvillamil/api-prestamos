@@ -4,6 +4,7 @@ import co.com.gestionprestamos.model.rol.Rol;
 import co.com.gestionprestamos.model.rol.gateways.RolRepository;
 import co.com.gestionprestamos.r2dbc.entities.RolEntity;
 import co.com.gestionprestamos.r2dbc.helper.ReactiveAdapterOperations;
+import co.com.gestionprestamos.r2dbc.mappers.UserMapper;
 import org.reactivecommons.utils.ObjectMapper;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Mono;

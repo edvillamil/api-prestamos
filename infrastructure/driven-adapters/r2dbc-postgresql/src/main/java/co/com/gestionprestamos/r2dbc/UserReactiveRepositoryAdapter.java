@@ -4,6 +4,7 @@ import co.com.gestionprestamos.model.user.User;
 import co.com.gestionprestamos.model.user.gateways.UserRepository;
 import co.com.gestionprestamos.r2dbc.entities.UserEntity;
 import co.com.gestionprestamos.r2dbc.helper.ReactiveAdapterOperations;
+import co.com.gestionprestamos.r2dbc.mappers.UserMapper;
 import org.reactivecommons.utils.ObjectMapper;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Mono;
@@ -26,8 +27,8 @@ public class UserReactiveRepositoryAdapter
     }
 
     @Override
-    public Mono<Boolean> existsByCorreo(String correo) {
-        return repository.existsByCorreoElectronico(correo);
+    public Mono<Boolean> existsByEmail(String email) {
+        return repository.existsByEmail(email);
     }
 
     @Override

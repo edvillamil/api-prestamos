@@ -7,6 +7,6 @@ import java.util.UUID;
 @Value
 public class RolResponse {
     UUID id;
-    String nombre;
-    String descripcion;
+    String name;
+    String description;
 }

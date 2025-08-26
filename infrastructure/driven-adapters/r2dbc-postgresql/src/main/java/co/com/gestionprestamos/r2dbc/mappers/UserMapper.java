@@ -1,4 +1,4 @@
-package co.com.gestionprestamos.r2dbc;
+package co.com.gestionprestamos.r2dbc.mappers;
 
 import co.com.gestionprestamos.model.rol.Rol;
 import co.com.gestionprestamos.model.user.User;
@@ -14,13 +14,13 @@ public class UserMapper {
     public UserEntity toData(User u) {
         return UserEntity.builder()
                 .id(u.getId() != null ? u.getId() : UUID.randomUUID())
-                .nombres(u.getNombres())
-                .apellidos(u.getApellidos())
-                .fechaNacimiento(u.getFechaNacimiento())
-                .direccion(u.getDireccion())
-                .telefono(u.getTelefono())
-                .correoElectronico(u.getCorreoElectronico())
-                .salarioBase(u.getSalarioBase())
+                .name(u.getName())
+                .lastName(u.getLastName())
+                .birthDate(u.getBirthDate())
+                .address(u.getAddress())
+                .mobileNumber(u.getMobileNumber())
+                .email(u.getEmail())
+                .baseSalary(u.getBaseSalary())
                 .rolId(u.getRol().getId())
                 .build();
     }
@@ -28,13 +28,13 @@ public class UserMapper {
     public User toDomain(UserEntity e) {
         return User.builder()
                 .id(e.getId())
-                .nombres(e.getNombres())
-                .apellidos(e.getApellidos())
-                .fechaNacimiento(e.getFechaNacimiento())
-                .direccion(e.getDireccion())
-                .telefono(e.getTelefono())
-                .correoElectronico(e.getCorreoElectronico())
-                .salarioBase(e.getSalarioBase())
+                .name(e.getName())
+                .lastName(e.getLastName())
+                .birthDate(e.getBirthDate())
+                .address(e.getAddress())
+                .mobileNumber(e.getMobileNumber())
+                .email(e.getEmail())
+                .baseSalary(e.getBaseSalary())
                 .rol(Rol.builder().id(e.getRolId()).build())
                 .build();
     }
@@ -42,8 +42,8 @@ public class UserMapper {
     public Rol toDomain(RolEntity r) {
         return Rol.builder()
                 .id(r.getId())
-                .nombre(r.getNombre())
-                .descripcion(r.getDescripcion())
+                .name(r.getName())
+                .description(r.getDescription())
                 .build();
     }
 

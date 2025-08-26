@@ -25,10 +25,10 @@ public class RegisterUserUseCase {
         }
 
         // Unicidad por correo
-        return userRepository.existsByCorreo(newUser.getCorreoElectronico())
+        return userRepository.existsByEmail(newUser.getEmail())
                 .flatMap(exists -> {
                     if (exists) {
-                        return Mono.error(new DuplicateEmailException(newUser.getCorreoElectronico()));
+                        return Mono.error(new DuplicateEmailException(newUser.getEmail()));
                     }
 
                     return rolRepository.findById(newUser.getRol().getId())

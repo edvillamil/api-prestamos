@@ -17,17 +17,17 @@ public class UserValidation {
 
         List<String> errors = new ArrayList<>();
 
-        if (u.getNombres() == null || u.getNombres().trim().isEmpty()) errors.add("nombres: requerido");
-        if (u.getApellidos() == null || u.getApellidos().trim().isEmpty()) errors.add("apellidos: requerido");
-        if (u.getCorreoElectronico() == null || u.getCorreoElectronico().trim().isEmpty()) {
+        if (u.getName() == null || u.getName().trim().isEmpty()) errors.add("nombres: requerido");
+        if (u.getLastName() == null || u.getLastName().trim().isEmpty()) errors.add("apellidos: requerido");
+        if (u.getEmail() == null || u.getEmail().trim().isEmpty()) {
             errors.add("correo_electronico: requerido");
-        } else if (!EMAIL_RX.matcher(u.getCorreoElectronico()).matches()) {
+        } else if (!EMAIL_RX.matcher(u.getEmail()).matches()) {
             errors.add("correo_electronico: formato inválido");
         }
-        if (u.getSalarioBase() == null) {
+        if (u.getBaseSalary() == null) {
             errors.add("salario_base: requerido");
-        } else if (u.getSalarioBase().compareTo(BigDecimal.ZERO) < 0
-                || u.getSalarioBase().compareTo(new BigDecimal("15000000")) > 0) {
+        } else if (u.getBaseSalary().compareTo(BigDecimal.ZERO) < 0
+                || u.getBaseSalary().compareTo(new BigDecimal("15000000")) > 0) {
             errors.add("salario_base: fuera de rango (0..15000000)");
         }
         return errors;

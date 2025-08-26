@@ -7,7 +7,7 @@ import java.util.UUID;
 
 public interface UserRepository {
 
-    Mono<Boolean> existsByCorreo(String correo);
+    Mono<Boolean> existsByEmail(String correo);
     Mono<User> save(User user);
     Mono<User> findById(UUID id);
 }

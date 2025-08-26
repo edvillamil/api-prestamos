@@ -11,11 +11,11 @@ import java.util.UUID;
 @Builder
 public class UserResponse {
     UUID id;
-    String nombres;
-    String apellidos;
-    LocalDate fecha_nacimiento;
-    String direccion;
-    String telefono;
-    String correo_electronico;
-    BigDecimal salario_base;
+    String name;
+    String last_name;
+    LocalDate birth_date;
+    String address;
+    String mobile_number;
+    String email;
+    BigDecimal base_salary;
 }

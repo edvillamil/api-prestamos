@@ -14,6 +14,6 @@ import java.util.UUID;
 @Builder(toBuilder = true)
 public class Rol {
     UUID id;
-    String nombre;
-    String descripcion;
+    String name;
+    String description;
 }

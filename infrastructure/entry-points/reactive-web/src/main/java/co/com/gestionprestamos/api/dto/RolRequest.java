@@ -4,6 +4,6 @@ import lombok.Value;
 
 @Value
 public class RolRequest {
-    String nombre;
-    String descripcion;
+    String name;
+    String description;
 }

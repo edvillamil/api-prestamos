@@ -16,12 +16,12 @@ public class User {
 
     @With
     UUID id;
-    String nombres;
-    String apellidos;
-    LocalDate fechaNacimiento;
-    String direccion;
-    String telefono;
-    String correoElectronico;
-    BigDecimal salarioBase;
+    String name;
+    String lastName;
+    LocalDate birthDate;
+    String address;
+    String mobileNumber;
+    String email;
+    BigDecimal baseSalary;
     Rol rol;
 }
