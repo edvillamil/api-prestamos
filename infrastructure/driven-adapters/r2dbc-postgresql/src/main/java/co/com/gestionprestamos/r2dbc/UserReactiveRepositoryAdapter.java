@@ -7,6 +7,7 @@ import co.com.gestionprestamos.r2dbc.helper.ReactiveAdapterOperations;
 import co.com.gestionprestamos.r2dbc.mappers.UserMapper;
 import org.reactivecommons.utils.ObjectMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Mono;
 
 import java.util.UUID;
@@ -37,7 +38,7 @@ public class UserReactiveRepositoryAdapter
     }
 
     @Override
-    //@Transactional // asegura atomicidad en la operación R2DBC
+    @Transactional // asegura atomicidad en la operación R2DBC
     public Mono<User> save(User user) {
         UserEntity userEntity = toData(user);
         userEntity.setRolId(user.getRol().getId());
