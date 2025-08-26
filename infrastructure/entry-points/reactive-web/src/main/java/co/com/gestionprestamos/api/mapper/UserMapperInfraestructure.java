@@ -1,7 +1,10 @@
 package co.com.gestionprestamos.api.mapper;
 
+import co.com.gestionprestamos.api.dto.RolRequest;
+import co.com.gestionprestamos.api.dto.RolResponse;
 import co.com.gestionprestamos.api.dto.UserRequest;
 import co.com.gestionprestamos.api.dto.UserResponse;
+import co.com.gestionprestamos.model.rol.Rol;
 import co.com.gestionprestamos.model.user.User;
 import org.springframework.stereotype.Component;
 
@@ -17,6 +20,7 @@ public class UserMapperInfraestructure {
                 .telefono(r.getTelefono())
                 .correoElectronico(r.getCorreo_electronico())
                 .salarioBase(r.getSalario_base())
+                .rol(Rol.builder().id(r.getRolId()).build())
                 .build();
     }
 
@@ -31,5 +35,16 @@ public class UserMapperInfraestructure {
                 .correo_electronico(u.getCorreoElectronico())
                 .salario_base(u.getSalarioBase())
                 .build();
+    }
+
+    public Rol toDomain(RolRequest request) {
+        return Rol.builder()
+                .nombre(request.getNombre())
+                .descripcion(request.getDescripcion())
+                .build();
+    }
+
+    public RolResponse toResponse(Rol rol) {
+        return new RolResponse(rol.getId(), rol.getNombre(), rol.getDescripcion());
     }
 }

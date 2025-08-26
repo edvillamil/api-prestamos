@@ -1,5 +1,6 @@
 package co.com.gestionprestamos.usecase.registeruser;
 
+import co.com.gestionprestamos.model.rol.gateways.RolRepository;
 import co.com.gestionprestamos.model.user.User;
 import co.com.gestionprestamos.model.user.gateways.UserRepository;
 import co.com.gestionprestamos.model.user.validation.UserValidation;
@@ -14,7 +15,7 @@ import java.util.List;
 public class RegisterUserUseCase {
 
     private final UserRepository userRepository;
-
+    private final RolRepository rolRepository;
 
     public Mono<User> execute(User newUser) {
         // Validaciones de dominio
@@ -26,8 +27,15 @@ public class RegisterUserUseCase {
         // Unicidad por correo
         return userRepository.existsByCorreo(newUser.getCorreoElectronico())
                 .flatMap(exists -> {
-                    if (exists) return Mono.error(new DuplicateEmailException(newUser.getCorreoElectronico()));
-                    return userRepository.save(newUser);
+                    if (exists) {
+                        return Mono.error(new DuplicateEmailException(newUser.getCorreoElectronico()));
+                    }
+
+                    return rolRepository.findById(newUser.getRol().getId())
+                            .flatMap(rol -> {
+                                User updatedUser = newUser.toBuilder().rol(rol).build();
+                                return userRepository.save(updatedUser);
+                            });
                 });
     }
 }

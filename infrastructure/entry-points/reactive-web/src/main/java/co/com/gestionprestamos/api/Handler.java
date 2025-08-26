@@ -1,5 +1,6 @@
 package co.com.gestionprestamos.api;
 
+import co.com.gestionprestamos.api.dto.RolRequest;
 import co.com.gestionprestamos.api.dto.UserRequest;
 import co.com.gestionprestamos.api.mapper.UserMapperInfraestructure;
 import co.com.gestionprestamos.usecase.registeruser.RegisterUserUseCase;

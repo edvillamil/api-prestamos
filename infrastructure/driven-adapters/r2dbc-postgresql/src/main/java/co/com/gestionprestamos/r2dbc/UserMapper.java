@@ -1,6 +1,8 @@
 package co.com.gestionprestamos.r2dbc;
 
+import co.com.gestionprestamos.model.rol.Rol;
 import co.com.gestionprestamos.model.user.User;
+import co.com.gestionprestamos.r2dbc.entities.RolEntity;
 import co.com.gestionprestamos.r2dbc.entities.UserEntity;
 import org.springframework.stereotype.Component;
 
@@ -19,6 +21,7 @@ public class UserMapper {
                 .telefono(u.getTelefono())
                 .correoElectronico(u.getCorreoElectronico())
                 .salarioBase(u.getSalarioBase())
+                .rolId(u.getRol().getId())
                 .build();
     }
 
@@ -32,6 +35,15 @@ public class UserMapper {
                 .telefono(e.getTelefono())
                 .correoElectronico(e.getCorreoElectronico())
                 .salarioBase(e.getSalarioBase())
+                .rol(Rol.builder().id(e.getRolId()).build())
+                .build();
+    }
+
+    public Rol toDomain(RolEntity r) {
+        return Rol.builder()
+                .id(r.getId())
+                .nombre(r.getNombre())
+                .descripcion(r.getDescripcion())
                 .build();
     }
 

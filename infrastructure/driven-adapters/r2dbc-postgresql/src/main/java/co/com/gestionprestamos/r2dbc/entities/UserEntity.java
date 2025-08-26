@@ -27,4 +27,5 @@ public class UserEntity {
     private String telefono;
     private String correoElectronico;
     private BigDecimal salarioBase;
+    private UUID rolId;
 }

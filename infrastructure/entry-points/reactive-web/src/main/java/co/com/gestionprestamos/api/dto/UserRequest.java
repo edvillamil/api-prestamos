@@ -4,6 +4,7 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Data
 public class UserRequest {
@@ -15,4 +16,5 @@ public class UserRequest {
     private String telefono;
     private String correo_electronico;
     private BigDecimal salario_base;
+    private UUID rolId;
 }

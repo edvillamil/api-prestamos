@@ -1,4 +1,5 @@
 package co.com.gestionprestamos.model.user;
+import co.com.gestionprestamos.model.rol.Rol;
 import lombok.*;
 //import lombok.NoArgsConstructor;
 
@@ -22,4 +23,5 @@ public class User {
     String telefono;
     String correoElectronico;
     BigDecimal salarioBase;
+    Rol rol;
 }
