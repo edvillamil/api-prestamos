@@ -1,5 +1,6 @@
 package co.com.gestionprestamos.api.exception;
 
+import co.com.gestionprestamos.usecase.getuser.exceptions.UserNotExistsException;
 import co.com.gestionprestamos.usecase.registeruser.RegisterUserUseCase;
 import co.com.gestionprestamos.usecase.registeruser.exceptions.DuplicateEmailException;
 import co.com.gestionprestamos.usecase.registeruser.exceptions.RegistrationValidationException;
@@ -26,16 +27,21 @@ public class GlobalErrorHandler implements ErrorWebExceptionHandler {
     @Override
     public Mono<Void> handle(ServerWebExchange exchange, Throwable ex) {
         HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
-        Object body;
+        Object body = ApiError.of("INTERNAL_ERROR", "Error interno del servidor", List.of());
 
         if (ex instanceof RegistrationValidationException ve) {
             status = HttpStatus.BAD_REQUEST;
             body = ApiError.of("VALIDATION_ERROR", ve.getMessage(), ve.getDetails());
-        } else if (ex instanceof DuplicateEmailException de) {
+        }
+
+        if (ex instanceof DuplicateEmailException de) {
             status = HttpStatus.CONFLICT;
             body = ApiError.of("EMAIL_DUPLICATE", de.getMessage(), List.of("correo_electronico duplicado"));
-        } else {
-            body = ApiError.of("INTERNAL_ERROR", "Error interno del servidor", List.of());
+        }
+
+        if (ex instanceof UserNotExistsException de) {
+            status = HttpStatus.NOT_FOUND;
+            body = ApiError.of("USER_NOT_FOUND", de.getMessage(), List.of("el usuario no fue encontrado"));
         }
 
         byte[] bytes = Jsons.toJson(body).getBytes(StandardCharsets.UTF_8);
