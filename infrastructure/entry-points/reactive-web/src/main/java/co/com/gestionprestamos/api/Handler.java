@@ -8,6 +8,7 @@ import co.com.gestionprestamos.usecase.registeruser.RegisterUserUseCase;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
+import org.springframework.validation.Validator;
 import org.springframework.web.reactive.function.BodyInserter;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.server.ServerRequest;
@@ -24,11 +25,13 @@ public class Handler {
     private final RegisterUserUseCase registerUser;
     private final UserMapperInfraestructure userMapper;
     private final GetUserUseCase getUserUseCase;
+    private final Validator validator;
 
-    public Handler(RegisterUserUseCase registerUser, UserMapperInfraestructure userMapper, GetUserUseCase getUserUseCase) {
+    public Handler(RegisterUserUseCase registerUser, UserMapperInfraestructure userMapper, GetUserUseCase getUserUseCase, Validator validator) {
         this.registerUser = registerUser;
         this.userMapper = userMapper;
         this.getUserUseCase = getUserUseCase;
+        this.validator = validator;
     }
 
     public Mono<ServerResponse> registerUser(ServerRequest req) {
@@ -48,9 +51,9 @@ public class Handler {
 
     public Mono<ServerResponse> getUser(ServerRequest req) {
 
-        UUID uuid = UUID.fromString(req.pathVariable("id"));
-        return getUserUseCase.execute(uuid)
-                .doOnNext( body -> log.info("Solicitud consulta ususario: " + uuid ))
+        String email = req.pathVariable("email");
+        return getUserUseCase.execute(email)
+                .doOnNext( body -> log.info("Solicitud consulta ususario: " + email ))
                 .map(userMapper::toResponse)
                 .flatMap( u-> ServerResponse
                         .ok()
